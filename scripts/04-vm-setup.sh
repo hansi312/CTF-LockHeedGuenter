@@ -103,7 +103,7 @@ done
 echo ""
 echo "==> Sanity checks..."
 
-if curl --silent --fail http://localhost:3000 | grep --quiet "Ammo & Tanks"; then
+if curl --silent --fail http://localhost:3000 | grep --quiet "LockHeedGünter"; then
   echo "    [OK] Custom shop name found"
 else
   echo "    [WARN] Custom shop name not found — verify NODE_ENV=bwi and bwi.yml application.name"

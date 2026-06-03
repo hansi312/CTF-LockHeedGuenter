@@ -9,7 +9,7 @@
 
 application:
   domain: bwi-ctf.local
-  name: 'Ammo & Tanks'
+  name: 'LockHeedGünter'
   logo: 'logo.png'
   favicon: 'favicon_v2.ico'
   theme: 'bluegrey-lightgreen'
@@ -108,9 +108,6 @@ products:
     deluxePrice: 12.99
     quantity: 200
     image: 'feldration.jpg'
-    reviews:
-      - text: 'Schmeckt wie zu Grundausbildungszeiten. Echter Soldatengeschmack!'
-        author: uvoelker
 
   - name: 'Kampfmesser KM2000'
     description: >-
@@ -183,9 +180,6 @@ products:
     deluxePrice: 249.00
     quantity: 999
     image: 'trainingslizenz.jpg'
-    reviews:
-      - text: 'Sehr praxisnahes Training. Empfehle ich jedem IT-Sicherheitsbeauftragten!'
-        author: jim
 
 memories:
   # Geo-stalking challenges require exactly two memory entries with GPS metadata.
@@ -194,11 +188,11 @@ memories:
   # or replace with real geotagged photos and update the answers accordingly.
   - image: 'bwi-kaserne-sommer.jpg'
     caption: 'Sommertag auf dem Kasernengelände'
-    user: 'uvoelker'
+    user: 'john'
     geoStalkingMetaSecurityQuestion: 3
     geoStalkingMetaSecurityAnswer: 'Köln'
   - image: 'bwi-uebung-winter.jpg'
     caption: 'Winterübung – irgendwo in Brandenburg'
-    user: 'jim'
+    user: 'emma'
     geoStalkingVisualSecurityQuestion: 10
     geoStalkingVisualSecurityAnswer: 'Frankfurt'
