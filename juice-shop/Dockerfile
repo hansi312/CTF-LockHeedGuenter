@@ -20,6 +20,16 @@ COPY assets/logo.png \
 COPY assets/favicon_v2.ico \
      /juice-shop/frontend/dist/frontend/assets/public/favicon_v2.ico
 
+# Product images
+COPY assets/products/ \
+     /juice-shop/frontend/dist/frontend/assets/public/images/products/
+
+# Memory/photo-wall images (served from images root, not products subdirectory)
+COPY assets/memories/kaserne-sommer.png \
+     /juice-shop/frontend/dist/frontend/assets/public/images/kaserne-sommer.png
+COPY assets/memories/uebung-winter.png \
+     /juice-shop/frontend/dist/frontend/assets/public/images/uebung-winter.png
+
 # Blueprint PDF for the "Retrieve Blueprint" challenge.
 # Without this file the challenge returns 404 and cannot be solved.
 COPY assets/bwi_nvg7_specs.pdf \

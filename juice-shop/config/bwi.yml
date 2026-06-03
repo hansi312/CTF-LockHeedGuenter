@@ -38,160 +38,171 @@ hackingInstructor:
 products:
   # -----------------------------------------------------------------------
   # CHALLENGE-REQUIRED PRODUCTS
-  # These products carry flags that wire up specific Juice Shop challenges.
   # Do NOT remove the challenge-flag fields or those challenges break silently.
   # -----------------------------------------------------------------------
 
   # Product Tampering challenge — exactly ONE product must have this field
-  - name: 'Bundeswehr Tarnanzug'
+  - name: 'LG-44 "Eisenfaust" Kampfpanzer'
     description: >-
-      Hochwertiger Flecktarn-Kampfanzug der Bundeswehr. Robust, langlebig und
-      unübertroffen in mitteleuropäischem Gelände. <em>Jetzt im Angebot!</em>
-    price: 149.99
-    deluxePrice: 129.99
-    quantity: 50
-    limitPerUser: 2
-    image: 'tarnanzug.jpg'
+      Der neueste Hauptkampfpanzer von LockHeedGünter. 1.500-PS-Turbodiesel,
+      140-mm-Glattrohrkanone, Reaktivpanzerung der Generation V.
+      Lieferzeit: 18 Monate. <em>Derzeit im Angebot — Flottenkauf möglich!</em>
+    price: 8900000.00
+    deluxePrice: 7500000.00
+    quantity: 12
+    limitPerUser: 1
+    image: 'panzer.png'
     urlForProductTamperingChallenge: 'https://www.bwi.de'
 
   # Christmas Special challenge — exactly ONE product must have this flag
-  - name: 'Adventskalender Feldration'
+  - name: 'LG Adventskalender "24 Tage Feuerkraft"'
     description: >-
-      Militärischer Adventskalender mit 24 Tagesrationen. Jeder Tag bringt eine
-      neue Überraschung aus dem Feldverpflegungssortiment. Limitierte Auflage!
-    price: 24.99
-    deluxePrice: 19.99
-    quantity: 100
-    image: 'feldration-advent.jpg'
+      Exklusiver LockHeedGünter Adventskalender für den anspruchsvollen
+      Verteidigungsexperten. Hinter jedem Türchen verbirgt sich ein
+      Miniatur-Waffensystemmodell. Limitierte Auflage — nur solange Vorrat reicht!
+    price: 299.99
+    deluxePrice: 249.99
+    quantity: 50
+    image: 'adventskalender.png'
     useForChristmasSpecialChallenge: true
 
   # Retrieve Blueprint + EXIF challenges — exactly ONE product must have both fields
   # The referenced PDF must exist in the container (Dockerfile copies it there)
-  - name: 'Nachtsichtgerät NVG-7'
+  - name: 'LG-F9 "Sturmadler" Mehrzweckkampfjet'
     description: >-
-      Professionelles Nachtsichtgerät für den taktischen Einsatz.
-      Generation-3-Technologie, Reichweite bis 300 m.
-    price: 2199.00
-    deluxePrice: 1999.00
-    quantity: 5
-    image: 'nvg7.jpg'
+      Supersonischer Mehrzweckkampfjet der 5. Generation. Stealth-Technologie,
+      AESA-Radar, Reichweite 3.200 km. Bewaffnung: 2× Luft-Luft-Raketen LG-R77,
+      4× Präzisionsbomben LG-GBU12. <em>Technische Daten: streng vertraulich.</em>
+    price: 95000000.00
+    deluxePrice: 88000000.00
+    quantity: 4
+    image: 'kampfjet.png'
     fileForRetrieveBlueprintChallenge: 'bwi_nvg7_specs.pdf'
     exifForBlueprintChallenge:
-      - Bundeswehr
-      - NVG-7
-      - BWI GmbH
+      - LockHeedGünter
+      - LG-F9
+      - Sturmadler
 
-  # Pastebin Data Leak challenge — keywords must appear in a pastebin.com paste.
-  # NOTE: This challenge requires outbound internet to pastebin.com and CANNOT be
-  # solved in an offline environment. Include in CTFd or exclude from scoring.
-  - name: 'Verschlüsselter USB-Stick'
+  # Pastebin Data Leak challenge — requires outbound internet to pastebin.com.
+  # Cannot be solved in an offline environment — exclude from CTFd scoring if needed.
+  - name: 'LG-SIGINT "Lauscher" Aufklärungsdrohne'
     description: >-
-      Militärisch zertifizierter USB-Stick mit 256-Bit-AES-Hardwareverschlüsselung.
-      BSI-zugelassen für VS-NfD.
-    price: 89.99
-    deluxePrice: 79.99
-    quantity: 20
-    image: 'usb-stick.jpg'
+      Unbemannte Aufklärungsdrohne mit SIGINT-Payload. Flugdauer: 36 Stunden,
+      Reichweite: 500 km, verschlüsselter Datenlink. Einsatz: strategische
+      Fernaufklärung und elektronische Kriegsführung.
+    price: 4200000.00
+    deluxePrice: 3800000.00
+    quantity: 8
+    image: 'drohne.png'
     keywordsForPastebinDataLeakChallenge:
-      - 'bwi-geheim'
-      - 'VS-NfD-Kennwort'
+      - 'LG-GEHEIM'
+      - 'Lauscher-Zugangscode'
 
   # -----------------------------------------------------------------------
-  # STANDARD PRODUCTS — military/Bundeswehr theme
+  # STANDARD PRODUCTS — LockHeedGünter Rüstungskatalog
   # -----------------------------------------------------------------------
 
-  - name: 'Bundeswehr Feldration (24h)'
+  - name: 'LG-CVN "Poseidon" Flugzeugträger'
     description: >-
-      Komplette 24-Stunden-Verpflegung für den Feldeinsatz. Enthält Hauptmahlzeiten,
-      Snacks, Getränkepulver und Zubehör. Kalorien: ca. 3600 kcal.
-    price: 14.99
-    deluxePrice: 12.99
-    quantity: 200
-    image: 'feldration.jpg'
+      Nuklear angetriebener Flugzeugträger der Poseidon-Klasse. Verdrängung:
+      100.000 t, Kapazität: 90 Flugzeuge, 5.000 Mann Besatzung.
+      Zwei elektromagnetische Katapultsysteme (EMALS). Auf Anfrage.
+    price: 13000000000.00
+    deluxePrice: 11500000000.00
+    quantity: 1
+    image: 'traeger.png'
 
-  - name: 'Kampfmesser KM2000'
+  - name: 'LG-AH7 "Wüstenskorpion" Kampfhubschrauber'
     description: >-
-      Das offizielle Bundeswehr-Kampfmesser. Klinge aus rostfreiem Edelstahl,
-      Sägerücken, Kunststoffgriff. Gesamtlänge: 285 mm.
-    price: 119.00
-    deluxePrice: 99.00
-    quantity: 30
-    image: 'km2000.jpg'
+      Zweisitziger Angriffshubschrauber. Bewaffnung: 1× 30-mm-Kettenkanone,
+      16× Panzerabwehrlenkraketen LG-HMT, 4× Luft-Luft-Raketen.
+      Zielerfassungssystem mit KI-gestützter Zielerkennung.
+    price: 31000000.00
+    deluxePrice: 28000000.00
+    quantity: 6
+    image: 'hubschrauber.png'
 
-  - name: 'Feldflasche mit Kochgeschirr'
+  - name: 'LG-SUB "Tiefseejäger" U-Boot'
     description: >-
-      Standard-Bundeswehr-Feldflasche (0,9 l) aus Aluminium inklusive passendem
-      Kochgeschirr. Unverzichtbar für jede Feldübung.
-    price: 29.99
-    deluxePrice: 24.99
-    quantity: 75
-    image: 'feldflasche.jpg'
+      Konventionell angetriebenes U-Boot der Tiefseejäger-Klasse. Tauchtiefe:
+      400 m, Reichweite: 15.000 sm, 8× Torpedorohre Kaliber 533 mm.
+      AIP-Antrieb für geräuschlose Langzeittauchfahrt.
+    price: 750000000.00
+    deluxePrice: 700000000.00
+    quantity: 2
+    image: 'uboot.png'
 
-  - name: 'Bundeswehr Schlafsack'
+  - name: 'LG-MLRS "Donnerhagel" Raketenwerfer'
     description: >-
-      Modularer Schlafsack der Bundeswehr. Temperaturbereich: −20 °C bis +10 °C.
-      Waschbar, kompakt packbar. Mit Außenhülle.
+      Selbstfahrendes Mehrfachraketenwerfer-System. 12-Rohr-Lafette,
+      Kaliber 227 mm, Reichweite bis 300 km mit ATACMS-kompatibler Munition.
+      Vollautomatisches Lade- und Feuerkontrollsystem.
+    price: 6800000.00
+    deluxePrice: 6200000.00
+    quantity: 9
+    image: 'raketenwerfer.png'
+
+  - name: 'LG-G33 "Splitterfürst" Handgranate (12er-Pack)'
+    description: >-
+      Offensiv-/Defensiv-Splitterhandgranate. Verzögerung: 4 Sekunden,
+      Splitterwirkung: 20 m Radius. Gehäuse aus vorgesplittertem Stahl.
+      Für den professionellen Infanteristen.
     price: 189.00
-    deluxePrice: 169.00
+    deluxePrice: 159.00
+    quantity: 500
+    image: 'granate.png'
+
+  - name: 'LG-APV "Schattenluchs" Taktisches Fahrzeug'
+    description: >-
+      Gepanzertes Mehrzweckfahrzeug (4×4). Schutzklasse STANAG 4569 Level 3,
+      V-förmiger Minenschutzrumpf, 300-PS-Dieselmotor, Nutzlast 1.200 kg.
+      Optional mit Waffenstation LG-RWS30 nachrüstbar.
+    price: 580000.00
+    deluxePrice: 520000.00
+    quantity: 20
+    image: 'fahrzeug.png'
+
+  - name: 'LG-SR50 "Geisterjäger" Scharfschützengewehr'
+    description: >-
+      Präzisionsschützengewehr Kaliber .50 BMG. Effektive Reichweite: 1.800 m,
+      Lauf aus kaltgehämmertem Stahl, verstellbarer Schaft, integrierter
+      Schalldämpfer optional. Genauigkeit: &lt; 0,5 MOA.
+    price: 14900.00
+    deluxePrice: 13500.00
+    quantity: 35
+    image: 'scharfschuetze.png'
+
+  - name: 'LG-MANPADS "Himmelswächter" Schulterrakete'
+    description: >-
+      Schultergestütztes Fliegerabwehrsystem (MANPADS). Infrarot-Suchkopf
+      der 3. Generation, Reichweite: 6 km, Gipfelhöhe: 4.500 m.
+      Reaktionszeit ab Schulter: unter 5 Sekunden.
+    price: 320000.00
+    deluxePrice: 290000.00
     quantity: 40
-    image: 'schlafsack.jpg'
+    image: 'manpads.png'
 
-  - name: 'Taktische Schutzweste Level III'
+  - name: 'LG-EXO "Stahlritter" Exoskelett'
     description: >-
-      Ballistische Schutzweste nach NIJ Level III. Schützt gegen Pistolenmunition
-      bis 9 mm. MOLLE-Träger, verstellbar. Farbe: Flecktarn.
-    price: 349.00
-    deluxePrice: 319.00
+      Taktisches Kampfexoskelett für Infanterie. Kraftverstärkung: 5×,
+      integriertes HUD, 8-Stunden-Akkulaufzeit, ballistischer Schutz
+      Level IV. Gewicht mit Panzerung: 32 kg. Serienreif ab Q3 2026.
+    price: 220000.00
+    deluxePrice: 195000.00
     quantity: 15
-    image: 'schutzweste.jpg'
-
-  - name: 'Marschkompass Bundeswehr'
-    description: >-
-      Professioneller Marschkompass der Bundeswehr. Flüssigkeitsgedämpft,
-      Messspiegel, Einteilung in 6400 NATO-Strich.
-    price: 64.99
-    deluxePrice: 59.99
-    quantity: 60
-    image: 'kompass.jpg'
-
-  - name: 'Sanitätstasche IFAK'
-    description: >-
-      Individual First Aid Kit nach TCCC-Standard. Enthält: CAT-Tourniquet,
-      Druckverband, Nasopharyngealtubus, Chest Seal. MOLLE-kompatibel.
-    price: 74.99
-    deluxePrice: 64.99
-    quantity: 45
-    image: 'ifak.jpg'
-
-  - name: 'Taktischer Rucksack 60 L'
-    description: >-
-      MOLLE-Rucksack der Bundeswehr. 60 Liter Fassungsvermögen, Hüftgurt,
-      Regenschutz, Hydrationssystem-kompatibel. Flecktarn-Muster.
-    price: 159.00
-    deluxePrice: 139.00
-    quantity: 25
-    image: 'rucksack.jpg'
-
-  - name: 'BWI CyberSec Trainingslizenz'
-    description: >-
-      Jahreslizenz für das BWI Cyber-Training-Portal. Beinhaltet alle Module für
-      IT-Grundschutz nach BSI-Standard. <em>Digitale Lieferung per E-Mail.</em>
-    price: 299.00
-    deluxePrice: 249.00
-    quantity: 999
-    image: 'trainingslizenz.jpg'
+    image: 'exoskelett.png'
 
 memories:
   # Geo-stalking challenges require exactly two memory entries with GPS metadata.
   # IMPORTANT: The image files must have real GPS EXIF data embedded.
   # Without geotagged images these challenges cannot be solved — exclude from scoring
   # or replace with real geotagged photos and update the answers accordingly.
-  - image: 'bwi-kaserne-sommer.jpg'
+  - image: 'kaserne-sommer.png'
     caption: 'Sommertag auf dem Kasernengelände'
     user: 'john'
     geoStalkingMetaSecurityQuestion: 3
     geoStalkingMetaSecurityAnswer: 'Köln'
-  - image: 'bwi-uebung-winter.jpg'
+  - image: 'uebung-winter.png'
     caption: 'Winterübung – irgendwo in Brandenburg'
     user: 'emma'
     geoStalkingVisualSecurityQuestion: 10
