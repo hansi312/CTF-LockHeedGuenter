@@ -53,6 +53,11 @@ products:
     limitPerUser: 1
     image: 'panzer.png'
     urlForProductTamperingChallenge: 'https://www.bwi.de'
+    reviews:
+      - text: 'Endlich ein Panzer der auch im Stadtverkehr überzeugt. Einparkassistent fehlt noch, aber das Produktteam hat Besserung versprochen.'
+        author: jim
+      - text: 'Reaktivpanzerung Gen V hält was sie verspricht. Getestet unter realen Bedingungen — keine weiteren Fragen. ★★★★★'
+        author: bjoern
 
   # Christmas Special challenge — exactly ONE product must have this flag
   - name: 'LG Adventskalender "24 Tage Feuerkraft"'
@@ -77,6 +82,11 @@ products:
     deluxePrice: 88000000.00
     quantity: 4
     image: 'kampfjet.png'
+    reviews:
+      - text: 'Radar hat beim ersten Flug direkt 12 Ziele gleichzeitig erfasst. Meine Piloten sind begeistert. Einziger Kritikpunkt: Bedienungsanleitung nur auf Englisch.'
+        author: ciso
+      - text: 'Stealth funktioniert hervorragend — ATC hat uns dreimal aus den Augen verloren. Technische Daten leider geschwärzt, Blueprint wäre hilfreich gewesen.'
+        author: jim
     fileForRetrieveBlueprintChallenge: 'bwi_nvg7_specs.pdf'
     exifForBlueprintChallenge:
       - LockHeedGünter
@@ -111,6 +121,11 @@ products:
     deluxePrice: 11500000000.00
     quantity: 1
     image: 'traeger.png'
+    reviews:
+      - text: 'Lieferung hat 3 Jahre gedauert, aber der Träger ist absolut beeindruckend. Parkplatz im Hafen musste ich selbst organisieren. 4/5 Sterne.'
+        author: jim
+      - text: 'Preis-Leistung top. Deluxe-Rabatt hat sich gelohnt — 1,5 Milliarden gespart. Katapult funktioniert einwandfrei, erster F9 direkt beim ersten Versuch gestartet.'
+        author: bjoern
 
   - name: 'LG-AH7 "Wüstenskorpion" Kampfhubschrauber'
     description: >-
@@ -131,6 +146,11 @@ products:
     deluxePrice: 700000000.00
     quantity: 2
     image: 'uboot.png'
+    reviews:
+      - text: 'AIP-Antrieb ist bemerkenswert leise. 72 Stunden getaucht ohne dass jemand etwas gemerkt hat — inklusive der eigenen Besatzung. Orientierungssystem bitte noch verbessern.'
+        author: ciso
+      - text: 'Torpedorohre lassen sich auch unter Druck problemlos bedienen. Einziger Minuspunkt: Kantine für 50 Mann nach 3 Wochen auf See etwas eng.'
+        author: jim
 
   - name: 'LG-MLRS "Donnerhagel" Raketenwerfer'
     description: >-
@@ -151,6 +171,11 @@ products:
     deluxePrice: 159.00
     quantity: 500
     image: 'granate.png'
+    reviews:
+      - text: 'Zuverlässig, präzise, bewährte Qualität. Habe das komplette 12er-Pack in einer Übung verbraucht — Nachschub war am nächsten Tag da. Kundenservice top!'
+        author: bjoern
+      - text: '4 Sekunden Verzögerung sind genau richtig. Nicht zu lang, nicht zu kurz. Kommt gut verpackt an, alle Sicherungen intakt. Klare Kaufempfehlung.'
+        author: ciso
 
   - name: 'LG-APV "Schattenluchs" Taktisches Fahrzeug'
     description: >-
@@ -161,6 +186,9 @@ products:
     deluxePrice: 520000.00
     quantity: 20
     image: 'fahrzeug.png'
+    reviews:
+      - text: 'V-Rumpf hat uns bei der letzten Übung das Leben gerettet — im übertragenen Sinne natürlich. Waffenstation RWS30 als Upgrade absolut empfehlenswert.'
+        author: bjoern
 
   - name: 'LG-SR50 "Geisterjäger" Scharfschützengewehr'
     description: >-
@@ -171,6 +199,11 @@ products:
     deluxePrice: 13500.00
     quantity: 35
     image: 'scharfschuetze.png'
+    reviews:
+      - text: '0,5 MOA bei 1.800 m ist keine Übertreibung — getestet. Schalldämpfer-Option unbedingt dazubestellen, macht einen großen Unterschied in der Kommunikation.'
+        author: ciso
+      - text: 'Bester Kauf seit Jahren. Lauf hält auch nach 5.000 Schuss noch die versprochene Genauigkeit. Support hat sofort geholfen als die Kimme locker war.'
+        author: jim
 
   - name: 'LG-MANPADS "Himmelswächter" Schulterrakete'
     description: >-
@@ -191,6 +224,11 @@ products:
     deluxePrice: 195000.00
     quantity: 15
     image: 'exoskelett.png'
+    reviews:
+      - text: 'HUD-Integration ist fantastisch. Trage das Exoskelett seit 3 Wochen täglich — Rücken ist seitdem schmerzfrei. Akku hält locker 8 Stunden durch.'
+        author: bjoern
+      - text: 'Kraftverstärkung 5× klingt viel, fühlt sich aber natürlich an nach kurzer Eingewöhnung. Q3 2026 kann nicht früh genug kommen — will gleich 10 Stück.'
+        author: ciso
 
 memories:
   # Geo-stalking challenges require exactly two memory entries with GPS metadata.
