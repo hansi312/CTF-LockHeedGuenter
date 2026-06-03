@@ -1,0 +1,76 @@
+# CTFd stack for the BWI Developer Conference CTF central server
+#
+# Setup:
+#   cp .env.example .env && edit .env with real secrets
+#   docker compose up -d
+#   Wait ~30s for MariaDB to initialize, then open http://<server-ip>/setup
+
+version: '3.8'
+
+services:
+  ctfd:
+    image: ctfd/ctfd:latest
+    restart: always
+    user: root
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE_URL=mysql+pymysql://ctfd:${MARIADB_PASSWORD}@db/ctfd
+      - REDIS_URL=redis://cache:6379
+      - WORKERS=4
+      - LOG_FOLDER=/var/log/CTFd
+      - UPLOAD_FOLDER=/var/uploads
+      - REVERSE_PROXY=true
+    volumes:
+      - .data/CTFd/logs:/var/log/CTFd
+      - .data/CTFd/uploads:/var/uploads
+    depends_on:
+      - db
+      - cache
+    networks:
+      - ctfd-internal
+      - ctfd-external
+
+  db:
+    image: mariadb:10.11
+    restart: always
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=ctfd
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=ctfd
+      - MARIADB_AUTO_UPGRADE=1
+    volumes:
+      - .data/mysql:/var/lib/mysql
+    networks:
+      - ctfd-internal
+    command:
+      - mysqld
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --wait_timeout=28800
+      - --log-warnings=0
+
+  cache:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - .data/redis:/data
+    networks:
+      - ctfd-internal
+
+  nginx:
+    image: nginx:stable-alpine
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - ctfd
+    networks:
+      - ctfd-external
+
+networks:
+  ctfd-internal:
+    internal: true
+  ctfd-external:

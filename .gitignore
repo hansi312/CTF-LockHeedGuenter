@@ -1,0 +1,19 @@
+# Secrets — never commit
+ctfd/.env
+**/ctf.config.resolved.yml
+.env
+
+# Docker artifacts
+*.tar
+
+# Generated challenge output
+challenge-export/*.csv
+challenge-export/*.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.iml
+.idea

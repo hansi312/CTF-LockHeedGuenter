@@ -1,0 +1,20 @@
+# Juice Shop docker-compose for Kali Linux VMs
+# Place this file and a .env file in the same directory on each VM.
+# The .env file must contain: CTF_KEY=<shared-secret>
+#
+# Start:   docker compose --env-file .env up -d
+# Stop:    docker compose down
+# Logs:    docker logs ctf-juice-shop-1
+
+version: '3.8'
+
+services:
+  juice-shop:
+    image: bwi-juice-shop:latest
+    container_name: juice-shop
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=bwi
+      - CTF_KEY=${CTF_KEY}

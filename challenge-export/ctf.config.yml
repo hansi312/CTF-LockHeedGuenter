@@ -1,0 +1,27 @@
+# juice-shop-ctf-cli configuration
+# Used by scripts/02-export-challenges.sh to generate a CTFd-importable CSV.
+#
+# IMPORTANT: ctfKey must match CTF_KEY in ctfd/.env exactly.
+# The script resolves this value automatically — do not edit ctfKey directly here.
+# Instead, set CTF_KEY in ctfd/.env and run the export script.
+
+ctfFramework: CTFd
+
+# Points to the running Juice Shop instance during export.
+# The export script starts a local container, so localhost:3000 is correct.
+juiceShopUrl: http://localhost:3000
+
+# Resolved at export time from ctfd/.env — placeholder value here
+ctfKey: CHANGE_ME_same_as_CTF_KEY_in_ctfd_env
+
+# Hint visibility in CTFd:
+#   none  = no hints
+#   free  = hints visible to all for free (recommended for mixed-skill event)
+#   paid  = hints cost points
+insertHints: free
+
+# Link to Juice Shop companion guide in hints
+insertHintUrls: free
+
+# Code snippet hints showing vulnerable code patterns (more revealing)
+insertHintSnippets: none

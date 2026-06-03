@@ -1,0 +1,204 @@
+# BWI Developer Conference CTF — Juice Shop Custom Configuration
+# Build image with: docker build -f juice-shop/Dockerfile -t bwi-juice-shop:latest .
+# Run with:         docker run -e NODE_ENV=bwi -e CTF_KEY=<key> -p 3000:3000 bwi-juice-shop:latest
+#
+# OPERATOR CHECKLIST before building:
+#   1. Replace every occurrence of "SHOPNAME" with the actual shop name
+#   2. Replace assets/logo.png with the real logo file
+#   3. Set CTF_KEY in ctfd/.env (same key used for challenge export)
+
+application:
+  domain: bwi-ctf.local
+  name: 'Ammo & Tanks'
+  logo: 'logo.png'
+  favicon: 'favicon_v2.ico'
+  theme: 'bluegrey-lightgreen'
+  showVersionNumber: false
+  showGitHubLinks: false
+  localBackupEnabled: false
+  numberOfRandomFakeUsers: 30
+  altcoinName: 'BundesCoins'
+  privacyContactEmail: 'security@bwi.de'
+
+challenges:
+  showHints: true
+  showMitigations: false
+  restrictToTutorialsFirst: false
+  codingChallengesEnabled: 'solved'
+  safetyMode: 'disabled'
+  # The Product Tampering challenge requires changing a product's URL to this value
+  overwriteUrlForProductTamperingChallenge: 'https://www.bwi.de'
+
+ctf:
+  showFlagsInNotifications: true
+
+hackingInstructor:
+  isEnabled: false
+
+products:
+  # -----------------------------------------------------------------------
+  # CHALLENGE-REQUIRED PRODUCTS
+  # These products carry flags that wire up specific Juice Shop challenges.
+  # Do NOT remove the challenge-flag fields or those challenges break silently.
+  # -----------------------------------------------------------------------
+
+  # Product Tampering challenge — exactly ONE product must have this field
+  - name: 'Bundeswehr Tarnanzug'
+    description: >-
+      Hochwertiger Flecktarn-Kampfanzug der Bundeswehr. Robust, langlebig und
+      unübertroffen in mitteleuropäischem Gelände. <em>Jetzt im Angebot!</em>
+    price: 149.99
+    deluxePrice: 129.99
+    quantity: 50
+    limitPerUser: 2
+    image: 'tarnanzug.jpg'
+    urlForProductTamperingChallenge: 'https://www.bwi.de'
+
+  # Christmas Special challenge — exactly ONE product must have this flag
+  - name: 'Adventskalender Feldration'
+    description: >-
+      Militärischer Adventskalender mit 24 Tagesrationen. Jeder Tag bringt eine
+      neue Überraschung aus dem Feldverpflegungssortiment. Limitierte Auflage!
+    price: 24.99
+    deluxePrice: 19.99
+    quantity: 100
+    image: 'feldration-advent.jpg'
+    useForChristmasSpecialChallenge: true
+
+  # Retrieve Blueprint + EXIF challenges — exactly ONE product must have both fields
+  # The referenced PDF must exist in the container (Dockerfile copies it there)
+  - name: 'Nachtsichtgerät NVG-7'
+    description: >-
+      Professionelles Nachtsichtgerät für den taktischen Einsatz.
+      Generation-3-Technologie, Reichweite bis 300 m.
+    price: 2199.00
+    deluxePrice: 1999.00
+    quantity: 5
+    image: 'nvg7.jpg'
+    fileForRetrieveBlueprintChallenge: 'bwi_nvg7_specs.pdf'
+    exifForBlueprintChallenge:
+      - Bundeswehr
+      - NVG-7
+      - BWI GmbH
+
+  # Pastebin Data Leak challenge — keywords must appear in a pastebin.com paste.
+  # NOTE: This challenge requires outbound internet to pastebin.com and CANNOT be
+  # solved in an offline environment. Include in CTFd or exclude from scoring.
+  - name: 'Verschlüsselter USB-Stick'
+    description: >-
+      Militärisch zertifizierter USB-Stick mit 256-Bit-AES-Hardwareverschlüsselung.
+      BSI-zugelassen für VS-NfD.
+    price: 89.99
+    deluxePrice: 79.99
+    quantity: 20
+    image: 'usb-stick.jpg'
+    keywordsForPastebinDataLeakChallenge:
+      - 'bwi-geheim'
+      - 'VS-NfD-Kennwort'
+
+  # -----------------------------------------------------------------------
+  # STANDARD PRODUCTS — military/Bundeswehr theme
+  # -----------------------------------------------------------------------
+
+  - name: 'Bundeswehr Feldration (24h)'
+    description: >-
+      Komplette 24-Stunden-Verpflegung für den Feldeinsatz. Enthält Hauptmahlzeiten,
+      Snacks, Getränkepulver und Zubehör. Kalorien: ca. 3600 kcal.
+    price: 14.99
+    deluxePrice: 12.99
+    quantity: 200
+    image: 'feldration.jpg'
+    reviews:
+      - text: 'Schmeckt wie zu Grundausbildungszeiten. Echter Soldatengeschmack!'
+        author: uvoelker
+
+  - name: 'Kampfmesser KM2000'
+    description: >-
+      Das offizielle Bundeswehr-Kampfmesser. Klinge aus rostfreiem Edelstahl,
+      Sägerücken, Kunststoffgriff. Gesamtlänge: 285 mm.
+    price: 119.00
+    deluxePrice: 99.00
+    quantity: 30
+    image: 'km2000.jpg'
+
+  - name: 'Feldflasche mit Kochgeschirr'
+    description: >-
+      Standard-Bundeswehr-Feldflasche (0,9 l) aus Aluminium inklusive passendem
+      Kochgeschirr. Unverzichtbar für jede Feldübung.
+    price: 29.99
+    deluxePrice: 24.99
+    quantity: 75
+    image: 'feldflasche.jpg'
+
+  - name: 'Bundeswehr Schlafsack'
+    description: >-
+      Modularer Schlafsack der Bundeswehr. Temperaturbereich: −20 °C bis +10 °C.
+      Waschbar, kompakt packbar. Mit Außenhülle.
+    price: 189.00
+    deluxePrice: 169.00
+    quantity: 40
+    image: 'schlafsack.jpg'
+
+  - name: 'Taktische Schutzweste Level III'
+    description: >-
+      Ballistische Schutzweste nach NIJ Level III. Schützt gegen Pistolenmunition
+      bis 9 mm. MOLLE-Träger, verstellbar. Farbe: Flecktarn.
+    price: 349.00
+    deluxePrice: 319.00
+    quantity: 15
+    image: 'schutzweste.jpg'
+
+  - name: 'Marschkompass Bundeswehr'
+    description: >-
+      Professioneller Marschkompass der Bundeswehr. Flüssigkeitsgedämpft,
+      Messspiegel, Einteilung in 6400 NATO-Strich.
+    price: 64.99
+    deluxePrice: 59.99
+    quantity: 60
+    image: 'kompass.jpg'
+
+  - name: 'Sanitätstasche IFAK'
+    description: >-
+      Individual First Aid Kit nach TCCC-Standard. Enthält: CAT-Tourniquet,
+      Druckverband, Nasopharyngealtubus, Chest Seal. MOLLE-kompatibel.
+    price: 74.99
+    deluxePrice: 64.99
+    quantity: 45
+    image: 'ifak.jpg'
+
+  - name: 'Taktischer Rucksack 60 L'
+    description: >-
+      MOLLE-Rucksack der Bundeswehr. 60 Liter Fassungsvermögen, Hüftgurt,
+      Regenschutz, Hydrationssystem-kompatibel. Flecktarn-Muster.
+    price: 159.00
+    deluxePrice: 139.00
+    quantity: 25
+    image: 'rucksack.jpg'
+
+  - name: 'BWI CyberSec Trainingslizenz'
+    description: >-
+      Jahreslizenz für das BWI Cyber-Training-Portal. Beinhaltet alle Module für
+      IT-Grundschutz nach BSI-Standard. <em>Digitale Lieferung per E-Mail.</em>
+    price: 299.00
+    deluxePrice: 249.00
+    quantity: 999
+    image: 'trainingslizenz.jpg'
+    reviews:
+      - text: 'Sehr praxisnahes Training. Empfehle ich jedem IT-Sicherheitsbeauftragten!'
+        author: jim
+
+memories:
+  # Geo-stalking challenges require exactly two memory entries with GPS metadata.
+  # IMPORTANT: The image files must have real GPS EXIF data embedded.
+  # Without geotagged images these challenges cannot be solved — exclude from scoring
+  # or replace with real geotagged photos and update the answers accordingly.
+  - image: 'bwi-kaserne-sommer.jpg'
+    caption: 'Sommertag auf dem Kasernengelände'
+    user: 'uvoelker'
+    geoStalkingMetaSecurityQuestion: 3
+    geoStalkingMetaSecurityAnswer: 'Köln'
+  - image: 'bwi-uebung-winter.jpg'
+    caption: 'Winterübung – irgendwo in Brandenburg'
+    user: 'jim'
+    geoStalkingVisualSecurityQuestion: 10
+    geoStalkingVisualSecurityAnswer: 'Frankfurt'
