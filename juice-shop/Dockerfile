@@ -16,6 +16,10 @@ COPY juice-shop/config/bwi.yml /juice-shop/config/bwi.yml
 COPY assets/logo.png \
      /juice-shop/frontend/dist/frontend/assets/public/images/logo.png
 
+# Custom favicon
+COPY assets/favicon_v2.ico \
+     /juice-shop/frontend/dist/frontend/assets/public/favicon_v2.ico
+
 # Blueprint PDF for the "Retrieve Blueprint" challenge.
 # Without this file the challenge returns 404 and cannot be solved.
 COPY assets/bwi_nvg7_specs.pdf \
