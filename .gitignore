@@ -5,6 +5,7 @@ ctfd/.env
 
 # Docker artifacts
 *.tar
+ctfd/.data/
 
 # Generated challenge output
 challenge-export/*.csv

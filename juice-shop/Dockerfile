@@ -2,10 +2,10 @@
 # Build context must be the project root:
 #   docker build -f juice-shop/Dockerfile -t bwi-juice-shop:latest .
 #
-# Pin JUICE_SHOP_VERSION to a specific tag (e.g. v17.1.1) before the event
+# Pin JUICE_SHOP_VERSION to a specific tag (e.g. v20.0.0) before the event
 # to ensure the build is reproducible. Use "latest" only during development.
 
-ARG JUICE_SHOP_VERSION=latest
+ARG JUICE_SHOP_VERSION=v20.0.0
 FROM bkimminich/juice-shop:${JUICE_SHOP_VERSION}
 
 # Custom configuration

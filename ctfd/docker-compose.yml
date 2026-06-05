@@ -9,7 +9,7 @@ version: '3.8'
 
 services:
   ctfd:
-    image: ctfd/ctfd:latest
+    image: ctfd/ctfd:3.8.5
     restart: always
     user: root
     environment:
@@ -31,7 +31,7 @@ services:
       - ctfd-external
 
   db:
-    image: mariadb:10.11
+    image: mariadb:11.4.12
     restart: always
     environment:
       - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
@@ -44,14 +44,14 @@ services:
     networks:
       - ctfd-internal
     command:
-      - mysqld
+      - mariadbd
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
       - --wait_timeout=28800
       - --log-warnings=0
 
   cache:
-    image: redis:7-alpine
+    image: redis:8.6.4-alpine
     restart: always
     volumes:
       - .data/redis:/data
@@ -59,7 +59,7 @@ services:
       - ctfd-internal
 
   nginx:
-    image: nginx:stable-alpine
+    image: nginx:1.28.3-alpine
     restart: always
     ports:
       - "80:80"
