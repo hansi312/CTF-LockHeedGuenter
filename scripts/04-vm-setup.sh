@@ -109,7 +109,7 @@ else
   echo "    [WARN] Custom shop name not found — verify NODE_ENV=bwi and bwi.yml application.name"
 fi
 
-if curl --silent --fail http://localhost:3000/api/Products | grep --quiet "Tarnanzug"; then
+if curl --silent --fail http://localhost:3000/api/Products | grep --quiet "Eisenfaust"; then
   echo "    [OK] Military-themed products loaded"
 else
   echo "    [WARN] Custom products not found — NODE_ENV may not be set correctly"
