@@ -29,9 +29,9 @@ Notebook 1..6 (each)
 
 ### Step 0 — Customize before building
 
-1. **Shop name**: Replace every `SHOPNAME` in `juice-shop/config/bwi.yml` and `juice-shop/Dockerfile` with the actual shop name.
+1. **Shop name**: Already set to `LockHeedGünter` in `juice-shop/config/bwi.yml`.
 2. **Logo**: Replace `assets/logo.png` with the real logo (PNG, ~200×200 px, transparent background recommended). Update `application.logo` in `bwi.yml` to match the filename.
-3. **Pin Juice Shop version** (optional but recommended): Edit `juice-shop/Dockerfile` and change `ARG JUICE_SHOP_VERSION=latest` to a specific tag like `v17.1.1`.
+3. **Juice Shop version**: Pinned to `v20.0.0` in `juice-shop/Dockerfile`.
 
 ### Step 1 — Generate secrets (once)
 
@@ -57,13 +57,17 @@ bash scripts/01-build-juice-shop.sh
 
 This uses `ctfd/.env` to load `CTF_KEY`. The image `bwi-juice-shop:latest` is created locally.
 
+> **Rebuild required after any change to:** `juice-shop/config/bwi.yml`, `juice-shop/Dockerfile`, or any file under `assets/`. The config and assets are baked into the image. After rebuilding, repeat Step 3.
+
 ### Step 3 — Export challenges to CTFd
 
 ```bash
 bash scripts/02-export-challenges.sh
 ```
 
-Starts a temporary Juice Shop container, runs `juice-shop-ctf-cli`, and writes `challenge-export/ctfd_challenges.csv`. The container is stopped automatically.
+Starts a temporary Juice Shop container, runs `juice-shop-ctf-cli`, writes `challenge-export/ctfd_challenges.csv`, and automatically applies the challenge curation (96 visible / 16 hidden). The container is stopped automatically.
+
+> **Re-export required after:** rebuilding the image (Step 2) or changing `CTF_KEY`.
 
 ### Step 4 — Set up CTFd (central server)
 
@@ -82,7 +86,7 @@ Wait ~30 seconds for MariaDB to initialize, then open `http://<server-ip>/setup`
 Import challenges:
 > Admin Panel → Config → Backup → Import → select `challenge-export/ctfd_challenges.csv`
 
-Optional: Hide challenges above 3 stars via Admin Panel → Challenges → visibility toggle.
+The CSV already contains the curated set (96 visible, 16 hidden). See the **Challenge Curation** section for details.
 
 Pre-create 6 teams and distribute credentials to each table.
 
@@ -149,15 +153,60 @@ Then restore all 6 VMs from snapshot.
 
 ---
 
-## Known Limitations
+## Challenge Curation
+
+The curated challenge set is in `challenge-export/ctfd_challenges.csv`.
+**96 of 111 Juice Shop challenges are visible; 16 are hidden.**
+
+### Visible challenges by difficulty
+
+| Stars | Points | Count |
+|---|---|---|
+| ★ | 100 | 13 |
+| ★★ | 250 | 18 |
+| ★★★ | 450 | 25 |
+| ★★★★ | 700 | 24 |
+| ★★★★★ | 1000 | 16 |
+| **Total** | | **96** |
+
+### Hidden challenges
+
+#### DoS / Crash (4) — can bring down a team's own Juice Shop instance
+| Challenge | Points |
+|---|---|
+| NoSQL DoS | 700 |
+| Blocked RCE DoS | 1000 |
+| Memory Bomb | 1000 |
+| XXE DoS | 1000 |
+
+#### 6★ — too advanced for a dev-conference audience (12)
+| Challenge | Points | Notes |
+|---|---|---|
+| Arbitrary File Write | 1350 | Also Danger Zone |
+| Forged Coupon | 1350 | |
+| Forged Signed JWT | 1350 | |
+| Imaginary Challenge | 1350 | Intentionally unsolvable easter egg |
+| Login Support Team | 1350 | |
+| Multiple Likes | 1350 | |
+| Premium Paywall | 1350 | |
+| SSRF | 1350 | |
+| SSTi | 1350 | Also Danger Zone |
+| Successful RCE DoS | 1350 | Also Danger Zone + Crash |
+| Video XSS | 1350 | Also Danger Zone |
+| Wallet Depletion | 1350 | |
+
+To enable 6★ challenges for a more advanced audience, set their state to `visible` in CTFd:
+Admin Panel → Challenges → (select challenge) → State → visible.
+
+### Notes on specific challenges
 
 | Challenge | Status | Notes |
 |---|---|---|
-| Pastebin Data Leak | ❌ Offline-incompatible | Requires outbound access to pastebin.com. Exclude from scoring. |
-| Geo-stalking (Meta/Visual) | ⚠️ Needs real EXIF | Memory images need GPS EXIF. Placeholder images = unsolvable. |
-| Retrieve Blueprint | ✅ Works | Placeholder PDF included; challenge is solvable. |
-| Christmas Special | ✅ Works | `useForChristmasSpecialChallenge` flag set on Feldration product. |
-| All other 1–3 ★ challenges | ✅ Works | Verified by config structure. |
+| Meta Geo Stalking | ✅ Works | `kaserne-sommer.png` has GPS EXIF → Köln |
+| Visual Geo Stalking | ✅ Works | `uebung-winter.png` has GPS EXIF → Frankfurt |
+| Retrieve Blueprint | ✅ Works | `bwi_nvg7_specs.pdf` included in image |
+| Christmas Special | ✅ Works | `useForChristmasSpecialChallenge` set on Adventskalender product |
+| Pastebin Data Leak | ✅ Works (requires internet) | Needs outbound access to pastebin.com; solvable when internet is available |
 
 ---
 

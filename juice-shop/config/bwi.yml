@@ -8,7 +8,7 @@
 #   3. Set CTF_KEY in ctfd/.env (same key used for challenge export)
 
 application:
-  domain: bwi-ctf.local
+  domain: dev.con.local
   name: 'LockHeedGünter'
   logo: 'logo.png'
   favicon: 'favicon_v2.ico'
@@ -25,7 +25,7 @@ challenges:
   showMitigations: false
   restrictToTutorialsFirst: false
   codingChallengesEnabled: 'solved'
-  safetyMode: 'disabled'
+  safetyMode: 'enabled'
   # The Product Tampering challenge requires changing a product's URL to this value
   overwriteUrlForProductTamperingChallenge: 'https://www.bwi.de'
 

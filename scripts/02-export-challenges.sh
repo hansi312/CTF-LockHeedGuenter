@@ -60,6 +60,47 @@ docker stop "${CONTAINER_ID}" > /dev/null
 # Remove resolved config — it contains the real CTF_KEY
 rm -f "${RESOLVED_CONFIG}"
 
+# ---------------------------------------------------------------------------
+# Curate challenges: hide DoS/crash challenges and all 6★ (1350 pt) challenges.
+# See README "Challenge Curation" section for rationale.
+# ---------------------------------------------------------------------------
+echo "==> Applying challenge curation..."
+
+python3 - "${EXPORT_DIR}/${OUTPUT_FILE}" << 'PYTHON'
+import csv, sys
+
+INPUT = sys.argv[1]
+
+# Challenges that can crash or DoS the Juice Shop container
+HIDE_DOS_CRASH = {
+    "NoSQL DoS",
+    "Blocked RCE DoS",
+    "Memory Bomb",
+    "XXE DoS",
+}
+
+with open(INPUT, newline='') as f:
+    reader = csv.DictReader(f)
+    fieldnames = reader.fieldnames
+    rows = list(reader)
+
+hidden = []
+for r in rows:
+    if int(r['value']) == 1350 or r['name'] in HIDE_DOS_CRASH:
+        r['state'] = 'hidden'
+        hidden.append(r['name'])
+
+with open(INPUT, 'w', newline='') as f:
+    writer = csv.DictWriter(f, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(rows)
+
+visible = sum(1 for r in rows if r['state'] == 'visible')
+print(f"    Visible: {visible}  |  Hidden: {len(hidden)}")
+for name in sorted(hidden):
+    print(f"      - {name}")
+PYTHON
+
 echo ""
 echo "==> Challenge export complete: ${EXPORT_DIR}/${OUTPUT_FILE}"
 echo ""

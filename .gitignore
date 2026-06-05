@@ -7,7 +7,8 @@ ctfd/.env
 *.tar
 ctfd/.data/
 
-# Generated challenge output
+# Generated challenge output — contains flag codes, never commit
+*.CTFd.csv
 challenge-export/*.csv
 challenge-export/*.zip
 
