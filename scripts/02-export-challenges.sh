@@ -50,7 +50,7 @@ echo "==> Running juice-shop-ctf-cli..."
 docker run --rm \
   --network host \
   --volume "${EXPORT_DIR}:/data" \
-  bkimminich/juice-shop-ctf \
+  bkimminich/juice-shop-ctf:v12.0.0 \
   --config "/data/$(basename "${RESOLVED_CONFIG}")" \
   --output "/data/${OUTPUT_FILE}"
 
