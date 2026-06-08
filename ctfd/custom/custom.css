@@ -1,0 +1,461 @@
+/* ═══════════════════════════════════════════════════════
+   LockHeedGünter CTF — Global Dark Theme
+   CTFd Admin → Config → Appearance → Custom CSS
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --mg:        #3a7d44;
+  --mg-bright: #52b56a;
+  --mg-dim:    #1e3d24;
+  --bg:        #070b07;
+  --bg2:       #0d130d;
+  --bg3:       #111a11;
+  --text:      #c8d8c8;
+  --text-dim:  #6b8b6b;
+  --border:    #1e3d24;
+}
+
+/* ── Base ─────────────────────────────────────────── */
+body {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+/* ── Navigation ───────────────────────────────────── */
+.navbar {
+  background-color: var(--bg2) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+.navbar-brand,
+.nav-link,
+.navbar-nav .nav-link {
+  color: var(--mg-bright) !important;
+}
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: #fff !important;
+}
+.navbar-toggler {
+  border-color: var(--border) !important;
+}
+
+/* ── Footer ───────────────────────────────────────── */
+footer {
+  background-color: var(--bg2) !important;
+  border-top: 1px solid var(--border) !important;
+  color: var(--text-dim) !important;
+}
+footer a { color: var(--mg-bright) !important; }
+
+/* ── Headings & Text ──────────────────────────────── */
+h1, h2, h3, h4, h5, h6 { color: #fff !important; }
+a { color: var(--mg-bright) !important; }
+a:hover { color: #fff !important; }
+p, li, label, small { color: var(--text); }
+.text-muted { color: var(--text-dim) !important; }
+
+/* ── Cards ────────────────────────────────────────── */
+.card {
+  background-color: var(--bg3) !important;
+  border-color: var(--border) !important;
+}
+.card-header {
+  background-color: var(--mg-dim) !important;
+  border-color: var(--border) !important;
+  color: var(--mg-bright) !important;
+}
+.card-body { color: var(--text) !important; }
+
+/* ── Jumbotron / Hero areas ───────────────────────── */
+.jumbotron {
+  background-color: var(--bg2) !important;
+  border: 1px solid var(--border);
+}
+
+/* ── Forms & Inputs ───────────────────────────────── */
+.form-control {
+  background-color: var(--bg2) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+.form-control:focus {
+  background-color: var(--bg3) !important;
+  border-color: var(--mg) !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 0.2rem rgba(58,125,68,.25) !important;
+}
+.form-control::placeholder { color: var(--text-dim) !important; }
+
+/* ── Buttons ──────────────────────────────────────── */
+.btn-primary {
+  background-color: var(--mg) !important;
+  border-color: var(--mg) !important;
+  color: #fff !important;
+  font-family: 'Courier New', monospace !important;
+  letter-spacing: .05em;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--mg-bright) !important;
+  border-color: var(--mg-bright) !important;
+  box-shadow: 0 0 12px rgba(82,181,106,.4) !important;
+}
+.btn-secondary {
+  background-color: transparent !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+.btn-secondary:hover {
+  border-color: var(--mg) !important;
+  color: var(--mg-bright) !important;
+}
+.btn-success {
+  background-color: var(--mg) !important;
+  border-color: var(--mg) !important;
+}
+.btn-outline-secondary {
+  border-color: var(--border) !important;
+  color: var(--text-dim) !important;
+}
+
+/* ── Tables (Scoreboard, Challenge list) ──────────── */
+.table {
+  color: var(--text) !important;
+}
+.table thead th {
+  background-color: var(--mg-dim) !important;
+  border-color: var(--border) !important;
+  color: var(--mg-bright) !important;
+  font-size: .75rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.table td, .table th {
+  border-color: var(--border) !important;
+}
+.table-hover tbody tr:hover {
+  background-color: rgba(58,125,68,.08) !important;
+  color: #fff !important;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255,255,255,.02) !important;
+}
+
+/* ── Badges ───────────────────────────────────────── */
+.badge-primary { background-color: var(--mg) !important; }
+.badge-success { background-color: var(--mg) !important; }
+
+/* ── Alerts ───────────────────────────────────────── */
+.alert-success {
+  background-color: rgba(58,125,68,.15) !important;
+  border-color: var(--mg) !important;
+  color: var(--mg-bright) !important;
+}
+.alert-danger {
+  background-color: rgba(192,57,43,.12) !important;
+  border-color: rgba(192,57,43,.4) !important;
+  color: #e07b72 !important;
+}
+.alert-info {
+  background-color: rgba(58,125,68,.1) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+/* ── Modal ────────────────────────────────────────── */
+.modal-content {
+  background-color: var(--bg3) !important;
+  border-color: var(--border) !important;
+}
+.modal-header {
+  background-color: var(--mg-dim) !important;
+  border-color: var(--border) !important;
+}
+.modal-title { color: var(--mg-bright) !important; }
+.modal-footer { border-color: var(--border) !important; }
+.close { color: var(--text) !important; }
+
+/* ── Challenge cards (CTFd challenge grid) ────────── */
+.challenge-button {
+  background-color: var(--bg3) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+  transition: border-color .15s, box-shadow .15s !important;
+}
+.challenge-button:hover {
+  border-color: var(--mg) !important;
+  box-shadow: 0 0 12px rgba(58,125,68,.3) !important;
+  color: #fff !important;
+}
+.challenge-button.solved {
+  border-color: var(--mg) !important;
+  background-color: rgba(58,125,68,.12) !important;
+}
+
+/* ── Notifications / Toasts ───────────────────────── */
+.toast {
+  background-color: var(--bg3) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+/* ── Dropdown ─────────────────────────────────────── */
+.dropdown-menu {
+  background-color: var(--bg2) !important;
+  border-color: var(--border) !important;
+}
+.dropdown-item {
+  color: var(--text) !important;
+}
+.dropdown-item:hover {
+  background-color: var(--mg-dim) !important;
+  color: var(--mg-bright) !important;
+}
+
+/* ── Pagination ───────────────────────────────────── */
+.page-item .page-link {
+  background-color: var(--bg3) !important;
+  border-color: var(--border) !important;
+  color: var(--mg-bright) !important;
+}
+.page-item.active .page-link {
+  background-color: var(--mg) !important;
+  border-color: var(--mg) !important;
+  color: #fff !important;
+}
+
+/* ── Input groups ─────────────────────────────────── */
+.input-group-text {
+  background-color: var(--mg-dim) !important;
+  border-color: var(--border) !important;
+  color: var(--mg-bright) !important;
+}
+
+/* ── Progress bars ────────────────────────────────── */
+.progress {
+  background-color: var(--bg2) !important;
+  border: 1px solid var(--border);
+}
+.progress-bar {
+  background-color: var(--mg) !important;
+}
+
+/* ── Scoreboard rank highlight ────────────────────── */
+tr.table-warning {
+  background-color: rgba(58,125,68,.15) !important;
+  color: var(--mg-bright) !important;
+}
+
+/* ── Landing Page — Hero ──────────────────────────── */
+.lhg-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 39px,
+      rgba(58,125,68,.06) 39px,
+      rgba(58,125,68,.06) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 39px,
+      rgba(58,125,68,.06) 39px,
+      rgba(58,125,68,.06) 40px
+    );
+  text-align: center;
+  padding: 4rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.lhg-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(58,125,68,.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Landing Page — Logo ──────────────────────────── */
+.lhg-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 18px rgba(82,181,106,.45));
+}
+
+/* ── Landing Page — Prompt line ───────────────────── */
+.lhg-prompt-line {
+  font-size: .85rem;
+  color: var(--text-dim);
+  letter-spacing: .15em;
+  margin-bottom: .5rem;
+}
+.lhg-prompt-line .prompt {
+  color: var(--mg-bright);
+  font-weight: bold;
+}
+
+/* ── Landing Page — Title ─────────────────────────── */
+.lhg-title {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 900;
+  color: #fff !important;
+  letter-spacing: .04em;
+  line-height: 1.1;
+  margin: 0 0 .4rem;
+  text-shadow: 0 0 40px rgba(82,181,106,.3);
+}
+.lhg-title .accent { color: var(--mg-bright); }
+.lhg-subtitle {
+  font-size: 1rem;
+  color: var(--text-dim);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Landing Page — Tagline ───────────────────────── */
+.lhg-tagline {
+  font-size: 1.15rem;
+  color: var(--text);
+  max-width: 640px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+  border-left: 3px solid var(--mg);
+  padding-left: 1.2rem;
+  text-align: left;
+}
+.lhg-tagline strong { color: var(--mg-bright); }
+
+/* ── Landing Page — CTA Buttons ───────────────────── */
+.lhg-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+.btn-lhg-primary {
+  background: var(--mg);
+  color: #fff !important;
+  border: none;
+  padding: .75rem 2rem;
+  font-family: 'Courier New', monospace;
+  font-size: .9rem;
+  font-weight: bold;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .2s, box-shadow .2s;
+  display: inline-block;
+}
+.btn-lhg-primary:hover {
+  background: var(--mg-bright);
+  box-shadow: 0 0 18px rgba(82,181,106,.5);
+  color: #fff !important;
+  text-decoration: none;
+}
+.btn-lhg-outline {
+  background: transparent;
+  color: var(--mg-bright) !important;
+  border: 1px solid var(--mg);
+  padding: .75rem 2rem;
+  font-family: 'Courier New', monospace;
+  font-size: .9rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color .2s, color .2s;
+  display: inline-block;
+}
+.btn-lhg-outline:hover {
+  border-color: var(--mg-bright);
+  color: #fff !important;
+  text-decoration: none;
+}
+
+/* ── Landing Page — Divider ───────────────────────── */
+.lhg-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  max-width: 400px;
+  margin: 0 auto 3rem;
+}
+
+/* ── Landing Page — Info Cards ────────────────────── */
+.lhg-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.lhg-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  text-align: left;
+  position: relative;
+}
+.lhg-card::before {
+  content: attr(data-index);
+  position: absolute;
+  top: -.7rem;
+  left: 1rem;
+  background: var(--bg);
+  padding: 0 .5rem;
+  font-size: .7rem;
+  color: var(--mg);
+  letter-spacing: .1em;
+}
+.lhg-card h4 {
+  color: var(--mg-bright) !important;
+  font-size: .85rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin: 0 0 .6rem;
+}
+.lhg-card p {
+  color: var(--text) !important;
+  font-size: .875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Landing Page — Warning banner ───────────────── */
+.lhg-warning {
+  background: rgba(192,57,43,.08);
+  border: 1px solid rgba(192,57,43,.3);
+  color: #e07b72;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  padding: .6rem 1.2rem;
+  max-width: 700px;
+  margin: 3rem auto 0;
+  text-align: center;
+}
+.lhg-warning strong { color: #e74c3c; }
+
+/* ── Admin panel ──────────────────────────────────── */
+#config-color-sidebar, .sidebar, #sidebar {
+  background-color: var(--bg2) !important;
+  border-right: 1px solid var(--border) !important;
+}
+.list-group-item {
+  background-color: var(--bg3) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+.list-group-item:hover,
+.list-group-item.active {
+  background-color: var(--mg-dim) !important;
+  color: var(--mg-bright) !important;
+}
