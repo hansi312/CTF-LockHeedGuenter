@@ -20,8 +20,3 @@ ctfKey: CHANGE_ME_same_as_CTF_KEY_in_ctfd_env
 #   paid  = hints cost points
 insertHints: free
 
-# Link to Juice Shop companion guide in hints
-insertHintUrls: free
-
-# Code snippet hints showing vulnerable code patterns (more revealing)
-insertHintSnippets: none

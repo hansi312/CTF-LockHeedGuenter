@@ -156,7 +156,7 @@ Then restore all 6 VMs from snapshot.
 ## Challenge Curation
 
 The curated challenge set is in `challenge-export/ctfd_challenges.csv`.
-**96 of 111 Juice Shop challenges are visible; 16 are hidden.**
+**108 of 111 Juice Shop challenges are visible; 3 are hidden (DoS only).**
 
 ### Visible challenges by difficulty
 
@@ -167,7 +167,8 @@ The curated challenge set is in `challenge-export/ctfd_challenges.csv`.
 | ★★★ | 450 | 25 |
 | ★★★★ | 700 | 24 |
 | ★★★★★ | 1000 | 16 |
-| **Total** | | **96** |
+| ★★★★★★ | 1350 | 12 |
+| **Total** | | **108** |
 
 ### Hidden challenges
 
@@ -179,7 +180,7 @@ The curated challenge set is in `challenge-export/ctfd_challenges.csv`.
 | Memory Bomb | 1000 |
 | XXE DoS | 1000 |
 
-#### 6★ — too advanced for a dev-conference audience (12)
+#### 6★ — enabled (12)
 | Challenge | Points | Notes |
 |---|---|---|
 | Arbitrary File Write | 1350 | Also Danger Zone |
@@ -194,9 +195,6 @@ The curated challenge set is in `challenge-export/ctfd_challenges.csv`.
 | Successful RCE DoS | 1350 | Also Danger Zone + Crash |
 | Video XSS | 1350 | Also Danger Zone |
 | Wallet Depletion | 1350 | |
-
-To enable 6★ challenges for a more advanced audience, set their state to `visible` in CTFd:
-Admin Panel → Challenges → (select challenge) → State → visible.
 
 ### Notes on specific challenges
 

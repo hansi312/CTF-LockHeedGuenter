@@ -61,7 +61,8 @@ docker stop "${CONTAINER_ID}" > /dev/null
 rm -f "${RESOLVED_CONFIG}"
 
 # ---------------------------------------------------------------------------
-# Curate challenges: hide DoS/crash challenges and all 6★ (1350 pt) challenges.
+# Curate challenges: hide DoS/crash challenges only.
+# 6★ (1350 pt) challenges are intentionally left visible.
 # See README "Challenge Curation" section for rationale.
 # ---------------------------------------------------------------------------
 echo "==> Applying challenge curation..."
@@ -86,7 +87,7 @@ with open(INPUT, newline='') as f:
 
 hidden = []
 for r in rows:
-    if int(r['value']) == 1350 or r['name'] in HIDE_DOS_CRASH:
+    if r['name'] in HIDE_DOS_CRASH:
         r['state'] = 'hidden'
         hidden.append(r['name'])
 
