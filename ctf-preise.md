@@ -1,0 +1,3 @@
+- 3x Security Key C NFC by Yubico
+- 3x bestickte handtücher mit CTF Logo
+- 3 Cardputer ADV V2

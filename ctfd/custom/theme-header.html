@@ -429,6 +429,45 @@ tr.table-warning {
 }
 .lhg-warning strong { color: #e74c3c; }
 
+/* ── Prizes Page — Podium ─────────────────────────── */
+.lhg-podium-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 200px;
+}
+.lhg-podium-rank {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text-dim);
+  letter-spacing: .05em;
+  margin-bottom: .25rem;
+}
+.lhg-podium-first {
+  color: var(--mg-bright);
+  text-shadow: 0 0 20px rgba(82,181,106,.5);
+}
+.lhg-podium-label {
+  font-size: .7rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: .5rem;
+}
+.lhg-podium-bar {
+  width: 100%;
+  background: var(--mg-dim);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  transition: background .2s;
+}
+.lhg-podium-bar-first {
+  background: var(--mg);
+  border-color: var(--mg-bright);
+  box-shadow: 0 0 20px rgba(58,125,68,.3);
+}
+
 /* ── Admin panel ──────────────────────────────────── */
 #config-color-sidebar, .sidebar, #sidebar {
   background-color: var(--bg2) !important;

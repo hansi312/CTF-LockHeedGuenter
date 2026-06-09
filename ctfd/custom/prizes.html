@@ -1,0 +1,116 @@
+<div class="lhg-hero" style="min-height: auto; padding: 4rem 1.5rem 3rem;">
+  <div style="width: 100%; max-width: 900px;">
+
+    <div class="lhg-prompt-line">
+      <span class="prompt">&gt;_</span>&nbsp;
+      root@devcon:~# cat prizes.txt
+    </div>
+
+    <h1 class="lhg-title" style="font-size: clamp(2rem, 5vw, 3.5rem);">
+      Die <span class="accent">Beute</span>
+    </h1>
+    <div class="lhg-subtitle">Top 3 &nbsp;·&nbsp; Highest Score Wins</div>
+
+    <p class="lhg-tagline" style="margin: 0 auto 3rem;">
+      Die <strong>drei Teams mit den meisten Punkten</strong> gewinnen.
+      Flags sammeln, Challenges lösen, Scoreboard dominieren.
+    </p>
+
+  </div>
+</div>
+
+<!-- Podium -->
+<div style="background: var(--bg); padding: 0 1.5rem 3rem;">
+  <div style="max-width: 900px; margin: 0 auto;">
+
+    <div style="display: flex; align-items: flex-end; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
+
+      <!-- 2nd Place -->
+      <div class="lhg-podium-slot" style="--h: 100px;">
+        <div class="lhg-podium-rank">02</div>
+        <div class="lhg-podium-label">2nd Place</div>
+        <div class="lhg-podium-bar" style="height: var(--h);"></div>
+      </div>
+
+      <!-- 1st Place -->
+      <div class="lhg-podium-slot" style="--h: 150px;">
+        <div class="lhg-podium-rank lhg-podium-first">01</div>
+        <div class="lhg-podium-label">1st Place</div>
+        <div class="lhg-podium-bar lhg-podium-bar-first" style="height: var(--h);"></div>
+      </div>
+
+      <!-- 3rd Place -->
+      <div class="lhg-podium-slot" style="--h: 70px;">
+        <div class="lhg-podium-rank">03</div>
+        <div class="lhg-podium-label">3rd Place</div>
+        <div class="lhg-podium-bar" style="height: var(--h);"></div>
+      </div>
+
+    </div>
+
+    <hr class="lhg-divider" style="margin-bottom: 3rem;">
+
+    <!-- Prize Cards -->
+    <div style="margin-bottom: 1rem; font-size: .75rem; color: var(--text-dim); letter-spacing: .2em; text-transform: uppercase; text-align: center;">
+      // jeder der top 3 gewinnt
+    </div>
+
+    <div class="lhg-cards" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+
+      <div class="lhg-card" data-index="// PRIZE 01">
+        <div style="font-size: 1.8rem; margin-bottom: .75rem;">🔑</div>
+        <h4>Security Key C NFC</h4>
+        <p style="margin-bottom: .5rem;">
+          <strong style="color: var(--mg-bright);">Yubico YubiKey</strong> — Hardware-Sicherheitsschlüssel
+          für passwortlose Authentifizierung und MFA.
+        </p>
+        <p style="font-size: .75rem; color: var(--text-dim);">USB-C &amp; NFC · FIDO2 · WebAuthn</p>
+      </div>
+
+      <div class="lhg-card" data-index="// PRIZE 02">
+        <div style="font-size: 1.8rem; margin-bottom: .75rem;">💻</div>
+        <h4>Cardputer ADV V2</h4>
+        <p style="margin-bottom: .5rem;">
+          <strong style="color: var(--mg-bright);">M5Stack Cardputer</strong> — Miniatur-Tastatur-Computer
+          für Hacking-Projekte, Badge-Exploitation und mehr.
+        </p>
+        <p style="font-size: .75rem; color: var(--text-dim);">ESP32-S3 · WiFi · programmierbar</p>
+      </div>
+
+      <div class="lhg-card" data-index="// PRIZE 03">
+        <div style="font-size: 1.8rem; margin-bottom: .75rem;">🏆</div>
+        <h4>CTF Handtuch</h4>
+        <p style="margin-bottom: .5rem;">
+          <strong style="color: var(--mg-bright);">Besticktes Handtuch</strong> mit offiziellem
+          LockHeedGünter CTF Logo — für den entspannten Pentest-Alltag.
+        </p>
+        <p style="font-size: .75rem; color: var(--text-dim);">Limitiert · exklusiv für Gewinner</p>
+      </div>
+
+    </div>
+
+    <!-- Scoring note -->
+    <div style="
+      margin-top: 3rem;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      padding: 1.25rem 1.5rem;
+      font-size: .82rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    ">
+      <span style="color: var(--mg-bright); font-weight: bold;">// Wertung</span><br>
+      Gewertet wird nach dem <strong style="color: var(--text);">Gesamtpunktestand</strong> am Ende des Workshops.
+      Bei Punktegleichstand entscheidet die frühere Einsendung des letzten Flags.
+      Das aktuelle Ranking ist jederzeit über das
+      <a href="/scoreboard" style="color: var(--mg-bright);">Scoreboard</a> einsehbar.
+    </div>
+
+    <div style="text-align: center; margin-top: 2.5rem;">
+      <a href="/challenges" class="btn-lhg-primary">&gt;_ Zu den Challenges</a>
+      &nbsp;
+      <a href="/scoreboard" class="btn-lhg-outline">Scoreboard</a>
+    </div>
+
+  </div>
+</div>
