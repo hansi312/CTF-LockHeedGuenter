@@ -39,6 +39,10 @@ docker compose up -d nginx
 sleep 4
 
 # Step 3: Obtain the real certificate from Let's Encrypt.
+# Remove the bootstrap cert — certbot refuses to run if the live dir exists
+# without a matching renewal conf, which the self-signed bootstrap doesn't have.
+rm -rf "${LIVE_DIR}"
+
 # DOMAIN_ALT is optional; if set, it is added as a SAN to the same certificate.
 CERTBOT_DOMAINS="-d ${DOMAIN}"
 if [ -n "${DOMAIN_ALT:-}" ]; then
