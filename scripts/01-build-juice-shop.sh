@@ -37,6 +37,6 @@ IMAGE_SIZE=$(docker image inspect "${IMAGE_NAME}:${IMAGE_TAG}" --format '{{.Size
 echo "==> Build complete: ${IMAGE_NAME}:${IMAGE_TAG} (${IMAGE_SIZE})"
 echo ""
 echo "Next steps:"
-echo "  Verify:           docker run -e NODE_ENV=bwi -e CTF_KEY=test -p 3000:3000 ${IMAGE_NAME}:${IMAGE_TAG}"
+echo "  Verify:           docker run -e NODE_ENV=bwi -e CTF_KEY=test -p 80:3000 ${IMAGE_NAME}:${IMAGE_TAG}"
 echo "  Export challenges: bash scripts/02-export-challenges.sh"
 echo "  Save for VMs:      bash scripts/03-save-image.sh"
