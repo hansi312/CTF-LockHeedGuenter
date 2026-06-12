@@ -1,5 +1,8 @@
 # Secrets — never commit
 ctfd/.env
+
+# Local development overrides — not for production
+ctfd/docker-compose.override.yml
 **/ctf.config.resolved.yml
 .env
 
