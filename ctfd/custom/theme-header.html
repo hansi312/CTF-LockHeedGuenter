@@ -514,5 +514,14 @@ document.addEventListener('DOMContentLoaded', function () {
       link.classList.add('lhg-active');
     }
   });
+
+  // Pre-fill registration code from ?code= URL parameter
+  if (path === '/register') {
+    var code = new URLSearchParams(window.location.search).get('code');
+    if (code) {
+      var field = document.querySelector('input[name="registration_code"]');
+      if (field) field.value = code;
+    }
+  }
 });
 </script>
