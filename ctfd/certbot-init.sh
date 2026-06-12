@@ -53,6 +53,7 @@ docker compose run --rm certbot certonly \
     --email "${CERTBOT_EMAIL}" \
     --agree-tos \
     --no-eff-email \
+    --force-renewal \
     ${STAGING:+--staging} \
     ${CERTBOT_DOMAINS}
 
