@@ -10,7 +10,7 @@ server {
 
     location / {
         # Preserve the accessed domain so both names keep working after redirect.
-        return 301 https://$$host$$request_uri;
+        return 301 https://$host$request_uri;
     }
 }
 
@@ -44,11 +44,11 @@ server {
     location / {
         proxy_pass           http://ctfd:8000;
         proxy_http_version   1.1;
-        proxy_set_header     Host              $$host;
+        proxy_set_header     Host              $host;
         proxy_set_header     X-Forwarded-Host  "";
-        proxy_set_header     X-Real-IP         $$remote_addr;
-        proxy_set_header     X-Forwarded-For   $$proxy_add_x_forwarded_for;
-        proxy_set_header     X-Forwarded-Proto $$scheme;
+        proxy_set_header     X-Real-IP         $remote_addr;
+        proxy_set_header     X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header     X-Forwarded-Proto $scheme;
         proxy_read_timeout   90;
         client_max_body_size 100M;
     }
