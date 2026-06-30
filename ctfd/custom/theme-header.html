@@ -492,30 +492,88 @@ tr.table-warning {
 </style>
 
 <script>
-/*
- * Active nav link highlighting.
- *
- * CTFd does not set an active class on navbar links automatically.
- * This script compares the current URL path against each nav link's href
- * and adds `lhg-active` to the matching element so the CSS can style it.
- *
- * Trailing slashes are stripped before comparison so `/challenges/` and
- * `/challenges` both match. startsWith() is used for sub-routes (e.g.
- * `/admin/challenges` keeps the Admin link active), but `/` is excluded
- * from prefix matching to avoid marking every link as active.
- */
+// Force dark mode before CTFd renders to avoid flash of light theme.
+document.documentElement.setAttribute('data-bs-theme', 'dark');
+localStorage.setItem('color-mode', 'dark');
+
+// Scoreboard canvas dark theme.
+// Chart.js is bundled in CTFd's webpack bundle (never on window.Chart), so we
+// monkey-patch CanvasRenderingContext2D.prototype before Chart.js loads and
+// remap any dark achromatic colour (axis/legend labels) to our theme colour.
+// Saturated colours (team line colours) are left untouched.
+(function () {
+  if (window.location.pathname.replace(/\/$/, '') !== '/scoreboard') return;
+
+  function isGrayAndDark(r, g, b) {
+    var mx = Math.max(r, g, b);
+    return (mx === 0 ? 0 : (mx - Math.min(r, g, b)) / mx) < 0.2 &&
+           (0.299 * r + 0.587 * g + 0.114 * b) < 180;
+  }
+
+  function shouldRemap(color) {
+    if (!color || typeof color !== 'string') return false;
+    var c = color.trim().toLowerCase();
+    if (c === 'black') return true;
+    var hex = c.replace('#', '');
+    if (hex.length === 3) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+    if (hex.length === 6)
+      return isGrayAndDark(parseInt(hex.slice(0,2),16), parseInt(hex.slice(2,4),16), parseInt(hex.slice(4,6),16));
+    var m = c.match(/^rgba?\(\s*(\d+),\s*(\d+),\s*(\d+)/);
+    return m ? isGrayAndDark(+m[1], +m[2], +m[3]) : false;
+  }
+
+  function wrap(proto, method, prop) {
+    var orig = proto[method];
+    proto[method] = function (text, x, y, maxWidth) {
+      var saved = this[prop];
+      if (shouldRemap(saved)) this[prop] = '#c8d8c8';
+      maxWidth !== undefined ? orig.call(this, text, x, y, maxWidth) : orig.call(this, text, x, y);
+      this[prop] = saved;
+    };
+  }
+
+  wrap(CanvasRenderingContext2D.prototype, 'fillText',   'fillStyle');
+  wrap(CanvasRenderingContext2D.prototype, 'strokeText', 'strokeStyle');
+}());
+
 document.addEventListener('DOMContentLoaded', function () {
   var path = window.location.pathname.replace(/\/$/, '') || '/';
+
+  // Active nav link highlighting — CTFd does not set this automatically.
   document.querySelectorAll('.navbar-nav .nav-link').forEach(function (link) {
-    var href = link.getAttribute('href');
-    if (!href) return;
-    var linkPath = href.replace(/\/$/, '') || '/';
-    if (path === linkPath || (linkPath !== '/' && path.startsWith(linkPath))) {
+    var lp = (link.getAttribute('href') || '').replace(/\/$/, '') || '/';
+    if (path === lp || (lp !== '/' && path.startsWith(lp)))
       link.classList.add('lhg-active');
-    }
   });
 
-  // Pre-fill registration code from ?code= URL parameter
+  if (path === '/scoreboard') {
+    // Smart refresh: poll the scoreboard API every 30 s and reload only when
+    // scores actually changed — avoids unnecessary flicker during quiet phases.
+    var _lastSnapshot = null;
+    function checkScoreboard() {
+      fetch('/api/v1/scoreboard/top/10')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var snapshot = JSON.stringify(data);
+          if (_lastSnapshot === null) { _lastSnapshot = snapshot; return; }
+          if (snapshot !== _lastSnapshot) location.reload();
+        })
+        .catch(function () {});
+    }
+    checkScoreboard();
+    setInterval(checkScoreboard, 30000);
+
+    // Prevent screen saver while scoreboard is displayed.
+    if ('wakeLock' in navigator) {
+      function acquireWakeLock() { navigator.wakeLock.request('screen').catch(function () {}); }
+      acquireWakeLock();
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState === 'visible') acquireWakeLock();
+      });
+    }
+  }
+
+  // Pre-fill registration code from ?code= URL parameter.
   if (path === '/register') {
     var code = new URLSearchParams(window.location.search).get('code');
     if (code) {
