@@ -539,6 +539,17 @@ localStorage.setItem('color-mode', 'dark');
 document.addEventListener('DOMContentLoaded', function () {
   var path = window.location.pathname.replace(/\/$/, '') || '/';
 
+  // Page title overrides.
+  var titles = {
+    '/users':      '>_ CTF | Users',
+    '/login':      '>_ CTF | Login',
+    '/register':   '>_ CTF | Register',
+    '/scoreboard': '>_ CTF | Scoreboard',
+    '/challenges': '>_ CTF | Challenges',
+    '/prizes':     '>_ CTF | Preise',
+  };
+  if (titles[path]) document.title = titles[path];
+
   // Active nav link highlighting — CTFd does not set this automatically.
   document.querySelectorAll('.navbar-nav .nav-link').forEach(function (link) {
     var lp = (link.getAttribute('href') || '').replace(/\/$/, '') || '/';
