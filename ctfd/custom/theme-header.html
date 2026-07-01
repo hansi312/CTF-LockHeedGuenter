@@ -476,6 +476,15 @@ tr.table-warning {
   box-shadow: 0 0 20px rgba(58,125,68,.3);
 }
 
+/* ── Scoreboard: full-width chart so legend wraps instead of scrolling ── */
+/* Activated via html[data-lhg-scoreboard] set synchronously in <head> script,
+   so the rule is live before Chart.js measures the container. */
+html[data-lhg-scoreboard] .container {
+  max-width: 100% !important;
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
 /* ── Admin panel ──────────────────────────────────── */
 #config-color-sidebar, .sidebar, #sidebar {
   background-color: var(--bg2) !important;
@@ -497,6 +506,35 @@ tr.table-warning {
 // Force dark mode before CTFd renders to avoid flash of light theme.
 document.documentElement.setAttribute('data-bs-theme', 'dark');
 localStorage.setItem('color-mode', 'dark');
+
+// Set html attribute synchronously so the full-width container CSS (html[data-lhg-scoreboard])
+// is active before ECharts measures the container width.
+if (window.location.pathname.replace(/\/$/, '') === '/scoreboard') {
+  document.documentElement.setAttribute('data-lhg-scoreboard', '');
+
+  // CTFd's scoreboard reads window.scoreboardChartOptions on every update() call.
+  // Intercept with a getter so every render gets legend.type:'plain' (wraps to rows
+  // instead of showing left/right scroll arrows) and dark-theme text colours.
+  (function () {
+    var _stored = {};
+    function patched(o) {
+      var out = Object.assign({}, o);
+      var leg  = Object.assign({}, out.legend);
+      leg.type            = 'plain';
+      leg.textStyle       = Object.assign({ color: '#c8d8c8' }, leg.textStyle);
+      leg.pageTextStyle   = Object.assign({ color: '#c8d8c8' }, leg.pageTextStyle);
+      out.legend = leg;
+      // Expand grid.bottom so the 2-row legend below the x-axis doesn't overlap it.
+      out.grid = Object.assign({}, out.grid, { bottom: 90, containLabel: true });
+      return out;
+    }
+    Object.defineProperty(window, 'scoreboardChartOptions', {
+      get: function ()  { return patched(_stored); },
+      set: function (v) { _stored = v || {};       },
+      configurable: true,
+    });
+  }());
+}
 
 // Scoreboard canvas dark theme.
 // Chart.js is bundled in CTFd's webpack bundle (never on window.Chart), so we
@@ -551,6 +589,7 @@ document.addEventListener('DOMContentLoaded', function () {
     '/prizes':     '>_ CTF | Preise',
   };
   if (titles[path]) document.title = titles[path];
+  if (path === '/scoreboard') document.body.classList.add('lhg-scoreboard');
 
   // Active nav link highlighting — CTFd does not set this automatically.
   document.querySelectorAll('.navbar-nav .nav-link').forEach(function (link) {
@@ -575,6 +614,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     checkScoreboard();
     setInterval(checkScoreboard, 30000);
+
+    // window.scoreboardChartOptions is intercepted in the <head> script with
+    // legend.type:'plain'. Trigger one extra update() so the already-rendered
+    // chart re-draws with the patched options immediately on page load.
+    var _graphEl = document.getElementById('score-graph');
+    if (_graphEl && window.Alpine) {
+      try { window.Alpine.$data(_graphEl).update(); } catch (_) {}
+    }
 
     // Prevent screen saver while scoreboard is displayed.
     if ('wakeLock' in navigator) {
