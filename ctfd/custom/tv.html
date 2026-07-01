@@ -1,0 +1,248 @@
+<!-- TV Scoreboard — Admin → Pages → New Page, Route: /tv, Format: html -->
+
+<style>
+.navbar, footer, .jumbotron { display: none !important; }
+
+.tv-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 2vh 3vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ── Header ── */
+.tv-header {
+  text-align: center;
+  flex-shrink: 0;
+  margin-bottom: 1.5vh;
+}
+.tv-prompt {
+  font-size: 1vw;
+  color: var(--text-dim);
+  letter-spacing: .15em;
+}
+.tv-title {
+  font-size: clamp(1.8rem, 3.5vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: .06em;
+  margin: 0;
+  text-shadow: 0 0 40px rgba(82,181,106,.3);
+}
+.tv-title .accent { color: var(--mg-bright); }
+.tv-subtitle {
+  font-size: .9vw;
+  color: var(--text-dim);
+  letter-spacing: .4em;
+  text-transform: uppercase;
+}
+.tv-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 1vh auto 1.5vh;
+  max-width: 600px;
+}
+
+/* ── Main: rankings + chart side by side ── */
+.tv-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 38% 1fr;
+  gap: 2.5vw;
+  min-height: 0;
+}
+
+/* ── Rankings ── */
+.tv-rankings {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  overflow: hidden;
+}
+.tv-row {
+  display: grid;
+  grid-template-columns: 5.5vw 1fr 10vw;
+  align-items: center;
+  gap: 1vw;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 1vh 1.2vw;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.tv-row-bar {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: rgba(58,125,68,.1);
+  transition: width .6s ease;
+  pointer-events: none;
+}
+.tv-rank {
+  font-size: clamp(1.2rem, 2.4vw, 3.5rem);
+  font-weight: 900;
+  text-align: center;
+  color: var(--text-dim);
+}
+.tv-rank-1 { color: #ffd700; text-shadow: 0 0 16px rgba(255,215,0,.4); }
+.tv-rank-2 { color: #c0c0c0; text-shadow: 0 0 16px rgba(192,192,192,.3); }
+.tv-rank-3 { color: #cd7f32; text-shadow: 0 0 16px rgba(205,127,50,.3); }
+.tv-name {
+  font-size: clamp(1rem, 2vw, 2.8rem);
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tv-score {
+  font-size: clamp(.9rem, 1.6vw, 2.4rem);
+  color: var(--mg-bright);
+  font-weight: bold;
+  text-align: right;
+}
+
+/* ── Chart (iframe) ── */
+.tv-chart-wrap {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  min-height: 0;
+}
+.tv-chart-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ── Footer ── */
+.tv-footer {
+  text-align: center;
+  margin-top: 1.2vh;
+  font-size: .75vw;
+  color: var(--text-dim);
+  letter-spacing: .15em;
+  flex-shrink: 0;
+}
+.tv-footer a {
+  color: var(--mg) !important;
+  text-decoration: none;
+  margin-left: 2em;
+}
+
+.tv-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-dim);
+  font-size: 1.2vw;
+  letter-spacing: .2em;
+}
+</style>
+
+<div class="tv-wrap">
+
+  <div class="tv-header">
+    <div class="tv-prompt">&gt;_ root@devcon:~# cat scoreboard.live</div>
+    <h1 class="tv-title">Lock<span class="accent">Heed</span>Günter</h1>
+    <div class="tv-subtitle">Live Scoreboard &nbsp;·&nbsp; DEV.CON CTF</div>
+  </div>
+
+  <hr class="tv-divider">
+
+  <div class="tv-main">
+    <div class="tv-rankings" id="tv-rankings">
+      <div class="tv-empty">// Lade...</div>
+    </div>
+    <div class="tv-chart-wrap">
+      <iframe id="tv-frame" src="/scoreboard"></iframe>
+    </div>
+  </div>
+
+  <div class="tv-footer">
+    <span id="tv-updated"></span>
+    <a href="/scoreboard">→ Vollständiges Scoreboard</a>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── Iframe: inject CSS to strip chrome, keep only the chart ──
+  var frame = document.getElementById('tv-frame');
+  frame.addEventListener('load', function () {
+    try {
+      var doc = frame.contentDocument;
+      var s   = doc.createElement('style');
+      s.textContent =
+        '.navbar, footer, .jumbotron, #scoreboard-table, .table-responsive, h2, .container > .row:last-child { display: none !important; }' +
+        'body { overflow: hidden !important; background: var(--bg) !important; }' +
+        '.container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }' +
+        'canvas { max-height: 100vh !important; }';
+      doc.head.appendChild(s);
+    } catch (e) {}
+  });
+
+  // ── Rankings table ───────────────────────────────────────────
+  var rankClass = {1:'tv-rank-1', 2:'tv-rank-2', 3:'tv-rank-3'};
+  var lastSnapshot = null;
+
+  function renderRankings(teams) {
+    var el = document.getElementById('tv-rankings');
+    if (!teams || !teams.length) {
+      el.innerHTML = '<div class="tv-empty">// Noch keine Scores</div>';
+      return;
+    }
+    var max = teams[0].score || 1;
+    el.innerHTML = teams.map(function (t) {
+      var pct = Math.round(t.score / max * 100);
+      var rc  = rankClass[t.pos] || '';
+      return '<div class="tv-row">' +
+        '<div class="tv-row-bar" style="width:' + pct + '%"></div>' +
+        '<div class="tv-rank ' + rc + '">' + pad(t.pos) + '</div>' +
+        '<div class="tv-name">' + esc(t.name) + '</div>' +
+        '<div class="tv-score">' + t.score.toLocaleString('de-DE') + ' pts</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  // ── Fetch loop ───────────────────────────────────────────────
+  function fetchAll() {
+    Promise.all([
+      fetch('/api/v1/scoreboard/top/10').then(function (r) { return r.json(); }),
+      fetch('/api/v1/scoreboard').then(function (r) { return r.json(); }),
+    ]).then(function (res) {
+      var snapshot = JSON.stringify(res[0]);
+      if (res[1].success && res[1].data) renderRankings(res[1].data.slice(0, 10));
+      if (snapshot !== lastSnapshot) {
+        lastSnapshot = snapshot;
+        var d = new Date();
+        document.getElementById('tv-updated').textContent =
+          '// Aktualisiert: ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+      }
+    }).catch(function () {});
+  }
+
+  fetchAll();
+  setInterval(fetchAll, 30000);
+
+  // Wake Lock
+  if ('wakeLock' in navigator) {
+    function lock() { navigator.wakeLock.request('screen').catch(function () {}); }
+    lock();
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible') lock();
+    });
+  }
+}());
+</script>
