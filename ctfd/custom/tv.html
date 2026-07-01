@@ -50,8 +50,8 @@
 .tv-main {
   flex: 1;
   display: grid;
-  grid-template-columns: 38% 1fr;
-  gap: 2.5vw;
+  grid-template-columns: 28% 1fr;
+  gap: 2vw;
   min-height: 0;
 }
 
@@ -59,17 +59,17 @@
 .tv-rankings {
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  gap: 0.55vh;
   overflow: hidden;
 }
 .tv-row {
   display: grid;
-  grid-template-columns: 5.5vw 1fr 10vw;
+  grid-template-columns: 3.5vw 1fr 7.5vw;
   align-items: center;
-  gap: 1vw;
+  gap: 0.8vw;
   background: var(--bg2);
   border: 1px solid var(--border);
-  padding: 1vh 1.2vw;
+  padding: 0.65vh 0.8vw;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -82,7 +82,7 @@
   pointer-events: none;
 }
 .tv-rank {
-  font-size: clamp(1.2rem, 2.4vw, 3.5rem);
+  font-size: clamp(0.8rem, 1.65vw, 1.75rem);
   font-weight: 900;
   text-align: center;
   color: var(--text-dim);
@@ -91,7 +91,7 @@
 .tv-rank-2 { color: #c0c0c0; text-shadow: 0 0 16px rgba(192,192,192,.3); }
 .tv-rank-3 { color: #cd7f32; text-shadow: 0 0 16px rgba(205,127,50,.3); }
 .tv-name {
-  font-size: clamp(1rem, 2vw, 2.8rem);
+  font-size: clamp(0.7rem, 1.4vw, 1.5rem);
   font-weight: bold;
   color: #fff;
   white-space: nowrap;
@@ -99,7 +99,7 @@
   text-overflow: ellipsis;
 }
 .tv-score {
-  font-size: clamp(.9rem, 1.6vw, 2.4rem);
+  font-size: clamp(0.65rem, 1.2vw, 1.3rem);
   color: var(--mg-bright);
   font-weight: bold;
   text-align: right;
